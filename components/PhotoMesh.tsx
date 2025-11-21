@@ -34,8 +34,10 @@ export default function PhotoMesh({
   const [loaded, setLoaded] = useState(false);
   const [currentScale, setCurrentScale] = useState(1);
 
-  // Load texture
-  const texture = useLoader(TextureLoader, photo.url);
+  // Load texture with CORS enabled
+  const texture = useLoader(TextureLoader, photo.url, (loader) => {
+    loader.crossOrigin = 'anonymous';
+  });
 
   useEffect(() => {
     if (texture) {
