@@ -44,6 +44,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
   const [placeName, setPlaceName] = useState('');
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
+  const [name, setName] = useState('');
   const [whySpecial, setWhySpecial] = useState('');
   const [email, setEmail] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -58,15 +59,16 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
   const [countryOpen, setCountryOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
-  const totalPages = 5;
+  const totalPages = 6;
 
   // Background colors for each page
   const pageBackgrounds = {
-    1: 'rgb(244, 239, 201)',
-    2: 'rgb(228, 238, 250)',
-    3: 'rgb(2, 68, 66)',
-    4: 'rgb(255, 255, 255)',
+    1: 'rgb(0, 0, 0)',        // Black background for name page
+    2: 'rgb(244, 239, 201)',
+    3: 'rgb(228, 238, 250)',
+    4: 'rgb(2, 68, 66)',
     5: 'rgb(255, 255, 255)',
+    6: 'rgb(255, 255, 255)',
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,7 +110,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
     goToNextPage();
   };
 
-  const handlePage2Next = () => {
+  const handlePage3Next = () => {
     if (!whySpecial) {
       setError('Please share why this place matters to you');
       return;
@@ -117,7 +119,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
     goToNextPage();
   };
 
-  const handlePage3Submit = async () => {
+  const handlePage4Submit = async () => {
     if (!selectedFile) {
       setError('Please upload a photo');
       return;
@@ -138,9 +140,9 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
             place_name: placeName,
             city: city,
             country: country,
+            name: name || null,
             why_special: whySpecial,
             photo_url: photoUrl,
-            name: null, // No name field anymore
             email: null, // Email comes later
           }
         ])
@@ -177,7 +179,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
     }
   };
 
-  const handlePage4Next = async () => {
+  const handlePage5Next = async () => {
     // Validate email format if provided
     if (email) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -259,7 +261,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
       <button
         onClick={onClose}
         className={`absolute top-4 left-4 md:top-6 md:left-6 z-50 transition-colors ${
-          currentPage === 3 ? 'text-white/60 hover:text-white' : 'text-gray-400 hover:text-black'
+          currentPage === 1 || currentPage === 4 ? 'text-white/60 hover:text-white' : 'text-gray-400 hover:text-black'
         }`}
       >
         <svg className="w-7 h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,18 +269,18 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
         </svg>
       </button>
 
-      {/* Page Indicator - Always visible except on thank you page */}
-      {currentPage < 5 && (
+      {/* Page Indicator - Always visible except on email and thank you pages */}
+      {currentPage <= 4 && (
         <div className={`absolute top-4 right-4 md:top-6 md:right-6 z-50 text-xs md:text-sm tracking-widest transition-colors ${
-          currentPage === 3 ? 'text-white/60' : 'text-gray-400'
+          currentPage === 1 || currentPage === 4 ? 'text-white/60' : 'text-gray-400'
         }`}>
-          {currentPage}/{currentPage === 4 ? 4 : 3}
+          {currentPage}/4
         </div>
       )}
 
       {/* Page Container */}
       <div className="relative w-full h-full">
-        {/* Page 1: Place Name + City/Country */}
+        {/* Page 1: Name */}
         <div
           className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
             currentPage === 1
@@ -287,6 +289,41 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               ? slideDirection === 'left'
                 ? '-translate-x-full'
                 : 'translate-x-full'
+              : 'translate-x-full'
+          }`}
+        >
+          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+            <div className="w-full max-w-2xl space-y-4 md:space-y-8">
+              <div>
+                <label className="block text-xl md:text-3xl text-white mb-4 md:mb-8 font-light leading-relaxed">
+                  What should we call you?
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full px-0 py-6 border-0 border-b-2 border-white bg-transparent outline-none text-xl md:text-2xl font-light text-white placeholder:text-white/40"
+                />
+              </div>
+
+              <button
+                onClick={goToNextPage}
+                className="w-full bg-white text-black py-5 text-lg md:text-xl font-medium hover:bg-gray-200 transition-colors rounded-full"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Page 2: Place Name + City/Country */}
+        <div
+          className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
+            currentPage === 2
+              ? 'translate-x-0'
+              : currentPage > 2
+              ? '-translate-x-full'
               : 'translate-x-full'
           }`}
         >
@@ -368,22 +405,30 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                 </div>
               )}
 
-              <button
-                onClick={handlePage1Next}
-                className="w-full bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
-              >
-                Next
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={goToPreviousPage}
+                  className="flex-1 border-2 border-gray-300 text-gray-600 py-6 text-xl font-medium hover:border-gray-400 transition-colors rounded-full"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={handlePage1Next}
+                  className="flex-1 bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Page 2: Why Special */}
+        {/* Page 3: Why Special */}
         <div
           className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-            currentPage === 2
+            currentPage === 3
               ? 'translate-x-0'
-              : currentPage > 2
+              : currentPage > 3
               ? '-translate-x-full'
               : 'translate-x-full'
           }`}
@@ -417,7 +462,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                   Back
                 </button>
                 <button
-                  onClick={handlePage2Next}
+                  onClick={handlePage3Next}
                   className="flex-1 bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
                 >
                   Next
@@ -427,12 +472,12 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           </div>
         </div>
 
-        {/* Page 3: Photo Upload + Submit */}
+        {/* Page 4: Photo Upload + Submit */}
         <div
           className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-            currentPage === 3
+            currentPage === 4
               ? 'translate-x-0'
-              : currentPage > 3
+              : currentPage > 4
               ? '-translate-x-full'
               : 'translate-x-full'
           }`}
@@ -492,7 +537,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                   Back
                 </button>
                 <button
-                  onClick={handlePage3Submit}
+                  onClick={handlePage4Submit}
                   disabled={uploading}
                   className="flex-1 bg-white text-black py-6 text-xl font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 rounded-full"
                 >
@@ -503,12 +548,12 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           </div>
         </div>
 
-        {/* Page 4: Email Collection */}
+        {/* Page 5: Email Collection */}
         <div
           className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-            currentPage === 4
+            currentPage === 5
               ? 'translate-x-0'
-              : currentPage > 4
+              : currentPage > 5
               ? '-translate-x-full'
               : 'translate-x-full'
           }`}
@@ -543,7 +588,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               )}
 
               <button
-                onClick={handlePage4Next}
+                onClick={handlePage5Next}
                 className="w-full bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
               >
                 Next
@@ -552,10 +597,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           </div>
         </div>
 
-        {/* Page 5: Thank You */}
+        {/* Page 6: Thank You */}
         <div
           className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-            currentPage === 5 ? 'translate-x-0' : 'translate-x-full'
+            currentPage === 6 ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
