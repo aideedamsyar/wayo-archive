@@ -292,9 +292,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-4xl space-y-4 md:space-y-8">
-              <div>
+          <div className="w-full h-full flex flex-col">
+            {/* Content Area */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+              <div className="w-full max-w-4xl">
                 <label className="block text-3xl md:text-5xl text-white mb-4 md:mb-8 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
                   What should we call you?
                 </label>
@@ -306,13 +307,18 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                   className="w-full px-0 py-6 border-0 border-b-2 border-white bg-transparent outline-none text-xl md:text-2xl font-light text-white placeholder:text-white/40"
                 />
               </div>
+            </div>
 
-              <button
-                onClick={goToNextPage}
-                className="w-full bg-white text-black py-5 text-lg md:text-xl font-medium hover:bg-gray-200 transition-colors rounded-full"
-              >
-                Next
-              </button>
+            {/* Fixed Buttons at Bottom */}
+            <div className="p-4 md:p-8">
+              <div className="w-full max-w-4xl mx-auto">
+                <button
+                  onClick={goToNextPage}
+                  className="w-full bg-white text-black py-5 text-lg md:text-xl font-medium hover:bg-gray-200 transition-colors rounded-full"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -327,9 +333,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-4xl space-y-4 md:space-y-8">
-              <div>
+          <div className="w-full h-full flex flex-col">
+            {/* Content Area */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+              <div className="w-full max-w-4xl">
                 <label className="block text-3xl md:text-5xl text-black mb-4 md:mb-8 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
                   If your best friend visited your city, where&apos;s the one place you&apos;d take them? *
                 </label>
@@ -397,27 +404,32 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                     </Popover>
                   </div>
                 </div>
+
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg mt-4">
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                )}
               </div>
+            </div>
 
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-600 text-sm">{error}</p>
+            {/* Fixed Buttons at Bottom */}
+            <div className="p-4 md:p-8">
+              <div className="w-full max-w-4xl mx-auto">
+                <div className="flex gap-4">
+                  <button
+                    onClick={goToPreviousPage}
+                    className="flex-1 border-2 border-gray-300 text-gray-600 py-6 text-xl font-medium hover:border-gray-400 transition-colors rounded-full"
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={handlePage1Next}
+                    className="flex-1 bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
+                  >
+                    Next
+                  </button>
                 </div>
-              )}
-
-              <div className="flex gap-4">
-                <button
-                  onClick={goToPreviousPage}
-                  className="flex-1 border-2 border-gray-300 text-gray-600 py-6 text-xl font-medium hover:border-gray-400 transition-colors rounded-full"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={handlePage1Next}
-                  className="flex-1 bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
-                >
-                  Next
-                </button>
               </div>
             </div>
           </div>
@@ -433,9 +445,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-4xl space-y-4 md:space-y-8">
-              <div>
+          <div className="w-full h-full flex flex-col">
+            {/* Content Area */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+              <div className="w-full max-w-4xl">
                 <label className="block text-3xl md:text-5xl text-black mb-4 md:mb-8 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
                   Why does this place matter to you? *
                 </label>
@@ -446,27 +459,32 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                   rows={8}
                   className="w-full px-0 py-6 border-0 border-b-2 border-black outline-none text-xl md:text-2xl font-light transition-colors resize-none leading-relaxed placeholder:text-gray-500"
                 />
+
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg mt-4">
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                )}
               </div>
+            </div>
 
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-600 text-sm">{error}</p>
+            {/* Fixed Buttons at Bottom */}
+            <div className="p-4 md:p-8">
+              <div className="w-full max-w-4xl mx-auto">
+                <div className="flex gap-4">
+                  <button
+                    onClick={goToPreviousPage}
+                    className="flex-1 border-2 border-gray-300 text-gray-600 py-6 text-xl font-medium hover:border-gray-400 transition-colors rounded-full"
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={handlePage3Next}
+                    className="flex-1 bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
+                  >
+                    Next
+                  </button>
                 </div>
-              )}
-
-              <div className="flex gap-4">
-                <button
-                  onClick={goToPreviousPage}
-                  className="flex-1 border-2 border-gray-300 text-gray-600 py-6 text-xl font-medium hover:border-gray-400 transition-colors rounded-full"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={handlePage3Next}
-                  className="flex-1 bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
-                >
-                  Next
-                </button>
               </div>
             </div>
           </div>
@@ -482,9 +500,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-4xl space-y-4 md:space-y-8">
-              <div>
+          <div className="w-full h-full flex flex-col">
+            {/* Content Area */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+              <div className="w-full max-w-4xl">
                 <label className="block text-3xl md:text-5xl text-white mb-4 md:mb-8 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
                   Upload a photo that captures its essence *
                 </label>
@@ -520,29 +539,34 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                     </div>
                   )}
                 </label>
+
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg mt-4">
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                )}
               </div>
+            </div>
 
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-600 text-sm">{error}</p>
+            {/* Fixed Buttons at Bottom */}
+            <div className="p-4 md:p-8">
+              <div className="w-full max-w-4xl mx-auto">
+                <div className="flex gap-4">
+                  <button
+                    onClick={goToPreviousPage}
+                    className="flex-1 border-2 border-white/40 text-white py-6 text-xl font-medium hover:border-white/60 transition-colors rounded-full"
+                    disabled={uploading}
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={handlePage4Submit}
+                    disabled={uploading}
+                    className="flex-1 bg-white text-black py-6 text-xl font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 rounded-full"
+                  >
+                    {uploading ? 'Submitting...' : 'Submit'}
+                  </button>
                 </div>
-              )}
-
-              <div className="flex gap-4">
-                <button
-                  onClick={goToPreviousPage}
-                  className="flex-1 border-2 border-white/40 text-white py-6 text-xl font-medium hover:border-white/60 transition-colors rounded-full"
-                  disabled={uploading}
-                >
-                  Back
-                </button>
-                <button
-                  onClick={handlePage4Submit}
-                  disabled={uploading}
-                  className="flex-1 bg-white text-black py-6 text-xl font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 rounded-full"
-                >
-                  {uploading ? 'Submitting...' : 'Submit'}
-                </button>
               </div>
             </div>
           </div>
