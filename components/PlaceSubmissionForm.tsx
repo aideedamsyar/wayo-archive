@@ -295,7 +295,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
             <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-xl md:text-3xl text-white mb-4 md:mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-white mb-4 md:mb-8 font-bold leading-relaxed" style={{ fontFamily: 'var(--font-jost)' }}>
                   What should we call you?
                 </label>
                 <input
@@ -330,7 +330,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
             <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-xl md:text-3xl text-black mb-4 md:mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-black mb-4 md:mb-8 font-bold leading-relaxed" style={{ fontFamily: 'var(--font-jost)' }}>
                   If your best friend visited your city, where&apos;s the one place you&apos;d take them? *
                 </label>
                 <input
@@ -436,7 +436,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
             <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-xl md:text-3xl text-black mb-4 md:mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-black mb-4 md:mb-8 font-bold leading-relaxed" style={{ fontFamily: 'var(--font-jost)' }}>
                   Why does this place matter to you? *
                 </label>
                 <textarea
@@ -485,7 +485,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
             <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-xl md:text-3xl text-white mb-4 md:mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-white mb-4 md:mb-8 font-bold leading-relaxed" style={{ fontFamily: 'var(--font-jost)' }}>
                   Upload a photo that captures its essence *
                 </label>
 
