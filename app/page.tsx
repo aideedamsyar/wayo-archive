@@ -317,7 +317,7 @@ export default function HomePage() {
             <TextAnimate
               animation="blurIn"
               as="h1"
-              className="text-2xl md:text-5xl font-bold tracking-wider text-black"
+              className="text-xl md:text-5xl font-bold tracking-wider text-black"
               style={{ fontFamily: 'var(--font-jost)', fontWeight: 700, lineHeight: '0.95' }}
             >
               {`Wayo
