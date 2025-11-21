@@ -588,7 +588,7 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               <div className="w-full max-w-4xl">
                 <div className="text-center mb-6 md:mb-12">
                   <BlurFade delay={0.2} duration={0.6}>
-                    <p className="text-2xl md:text-4xl text-gray-800 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
+                    <p className="text-3xl md:text-5xl text-gray-800 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
                       Somewhere in the world, someone feels just like you. Don&apos;t you wonder what their favorite place is? We&apos;ll bring you together.
                     </p>
                   </BlurFade>
