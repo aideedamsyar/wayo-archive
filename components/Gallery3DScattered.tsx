@@ -215,9 +215,15 @@ export default function Gallery3DScattered({
           enableZoom={true}
           minDistance={10}
           maxDistance={40}
-          rotateSpeed={0.5}
-          zoomSpeed={0.8}
-          panSpeed={0.5}
+          enableDamping={true}
+          dampingFactor={0.08}
+          rotateSpeed={1.15}
+          zoomSpeed={1.2}
+          panSpeed={1.1}
+          touches={{
+            ONE: THREE.TOUCH.ROTATE,
+            TWO: THREE.TOUCH.PAN
+          }}
           autoRotate={false} // No auto rotation for gallery feel
           onStart={() => setIsUserInteracting(true)}
           onEnd={() => setIsUserInteracting(false)}

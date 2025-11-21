@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { ImagePresets } from '@/lib/cloudflare-images';
 
 export interface ScreenPosition {
   x: number;
@@ -61,9 +60,30 @@ export default function PhotoMeshLocal({
   const lastReportRef = useRef(0);
   const notifiedReadyRef = useRef(false);
 
-  // Load a small gallery-only thumbnail; fall back to raw if transform host blocks CORS
-  const imageUrl = ImagePresets.galleryThumbnail(photo.url);
-  const fallbackUrl = photo.url;
+  const ensureHttps = (src: string) => {
+    if (!src) return '';
+    try {
+      const u = new URL(src);
+      if (u.protocol === 'http:') {
+        u.protocol = 'https:';
+        return u.toString();
+      }
+      return src;
+    } catch {
+      return src.startsWith('//') ? `https:${src}` : src;
+    }
+  };
+
+  const buildThumbUrl = (src: string) => {
+    src = ensureHttps(src);
+    if (!src) return '';
+    const params = 'width=520&quality=74&format=auto&fit=cover';
+    return src.includes('?') ? `${src}&${params}` : `${src}?${params}`;
+  };
+
+  // Load a small gallery-only thumbnail on the same host; fall back to raw if it fails
+  const imageUrl = buildThumbUrl(photo.url);
+  const fallbackUrl = ensureHttps(photo.url);
   useEffect(() => {
     let isMounted = true;
     const img = new Image();

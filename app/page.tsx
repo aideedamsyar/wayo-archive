@@ -245,7 +245,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="relative w-full h-screen bg-white overflow-hidden">
+    <main className="relative w-full h-dvh bg-white overflow-hidden" style={{ height: '100dvh' }}>
       {/* Gallery Section - slides up when form is shown */}
       <div
         className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
@@ -311,13 +311,13 @@ export default function HomePage() {
         </div>
 
         {/* CTA Section - Clean and Professional */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 p-6 md:p-12 pb-8 md:pb-16 bg-gradient-to-t from-white via-white/95 to-transparent">
-          <div className="max-w-md mx-auto text-center space-y-6">
+        <div className="absolute bottom-0 left-0 right-0 z-20 p-4 pb-6 md:p-12 md:pb-16 bg-gradient-to-t from-white via-white/95 to-transparent">
+          <div className="max-w-md mx-auto text-center space-y-4">
             {/* Title */}
             <TextAnimate
               animation="blurIn"
               as="h1"
-              className="text-4xl md:text-5xl font-bold tracking-wider text-black"
+              className="text-2xl md:text-5xl font-bold tracking-wider text-black"
               style={{ fontFamily: 'var(--font-jost)', fontWeight: 700, lineHeight: '0.95' }}
             >
               {`Wayo
@@ -337,7 +337,7 @@ Project`}
                   });
                 }
               }}
-              className="w-full max-w-sm mx-auto bg-black text-white py-5 px-8 rounded-full text-xl font-medium hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="w-full max-w-sm mx-auto bg-black text-white py-4 px-8 md:py-5 rounded-full text-lg md:text-xl font-medium hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
               style={{ letterSpacing: '0' }}
             >
               Don&apos;t Click Here

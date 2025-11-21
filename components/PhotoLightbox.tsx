@@ -27,6 +27,13 @@ const BACKDROP_EASE = 'cubic-bezier(0.4, 0.0, 0.2, 1)';
 
 const buildImageUrl = (src: string) => {
   if (!src) return '';
+  try {
+    const u = new URL(src);
+    if (u.protocol === 'http:') u.protocol = 'https:';
+    src = u.toString();
+  } catch {
+    src = src.startsWith('//') ? `https:${src}` : src;
+  }
   const hasQuery = src.includes('?');
   const params = 'width=1200&quality=80&format=auto&fit=cover';
   return hasQuery ? `${src}&${params}` : `${src}?${params}`;

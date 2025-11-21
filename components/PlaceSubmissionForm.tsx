@@ -258,18 +258,18 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
       {/* Close Button - Always visible */}
       <button
         onClick={onClose}
-        className={`absolute top-6 left-6 z-50 transition-colors ${
+        className={`absolute top-4 left-4 md:top-6 md:left-6 z-50 transition-colors ${
           currentPage === 3 ? 'text-white/60 hover:text-white' : 'text-gray-400 hover:text-black'
         }`}
       >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-7 h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
       {/* Page Indicator - Always visible except on thank you page */}
       {currentPage < 5 && (
-        <div className={`absolute top-6 right-6 z-50 text-sm tracking-widest transition-colors ${
+        <div className={`absolute top-4 right-4 md:top-6 md:right-6 z-50 text-xs md:text-sm tracking-widest transition-colors ${
           currentPage === 3 ? 'text-white/60' : 'text-gray-400'
         }`}>
           {currentPage}/{currentPage === 4 ? 4 : 3}
@@ -290,10 +290,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-8">
-            <div className="w-full max-w-2xl space-y-8">
+          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+            <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-2xl md:text-3xl text-black mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-black mb-4 md:mb-8 font-light leading-relaxed">
                   If your best friend visited your city, where&apos;s the one place you&apos;d take them? *
                 </label>
                 <input
@@ -388,10 +388,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-8">
-            <div className="w-full max-w-2xl space-y-8">
+          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+            <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-2xl md:text-3xl text-black mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-black mb-4 md:mb-8 font-light leading-relaxed">
                   Why does this place matter to you? *
                 </label>
                 <textarea
@@ -437,10 +437,10 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-8">
-            <div className="w-full max-w-2xl space-y-8">
+          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+            <div className="w-full max-w-2xl space-y-4 md:space-y-8">
               <div>
-                <label className="block text-2xl md:text-3xl text-white mb-8 font-light leading-relaxed">
+                <label className="block text-xl md:text-3xl text-white mb-4 md:mb-8 font-light leading-relaxed">
                   Upload a photo that captures its essence *
                 </label>
 
@@ -513,11 +513,11 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-8">
-            <div className="w-full max-w-2xl space-y-8">
-              <div className="text-center mb-12">
+          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+            <div className="w-full max-w-2xl space-y-4 md:space-y-8">
+              <div className="text-center mb-6 md:mb-12">
                 <BlurFade delay={0.2} duration={0.6}>
-                  <p className="text-2xl md:text-3xl text-gray-800 font-bold leading-relaxed">
+                  <p className="text-xl md:text-3xl text-gray-800 font-bold leading-relaxed">
                     Somewhere in the world, someone feels just like you. Don&apos;t you wonder what their favorite place is? We&apos;ll bring you together.
                   </p>
                 </BlurFade>
