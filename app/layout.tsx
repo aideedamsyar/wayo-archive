@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Didact_Gothic, Jost, PT_Serif } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const didactGothic = Didact_Gothic({
@@ -56,6 +57,20 @@ export default function RootLayout({
         className={`${didactGothic.variable} ${jost.variable} ${ptSerif.variable} antialiased`}
       >
         {children}
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VKFHZRL676"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VKFHZRL676');
+          `}
+        </Script>
       </body>
     </html>
   );
