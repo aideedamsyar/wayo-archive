@@ -582,41 +582,49 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
               : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-2xl space-y-4 md:space-y-8">
-              <div className="text-center mb-6 md:mb-12">
-                <BlurFade delay={0.2} duration={0.6}>
-                  <p className="text-xl md:text-3xl text-gray-800 font-bold leading-relaxed">
-                    Somewhere in the world, someone feels just like you. Don&apos;t you wonder what their favorite place is? We&apos;ll bring you together.
-                  </p>
-                </BlurFade>
-              </div>
-
-              <div className="mb-8">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="w-full px-0 py-6 border-0 border-b-2 border-gray-200 focus:border-black outline-none text-2xl md:text-3xl font-light transition-colors text-center placeholder:text-gray-500"
-                />
-                <p className="mt-3 text-center text-sm text-gray-400 font-light">
-                  We&apos;ll send you the result to this email
-                </p>
-              </div>
-
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-600 text-sm">{error}</p>
+          <div className="w-full h-full flex flex-col">
+            {/* Content Area */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+              <div className="w-full max-w-4xl">
+                <div className="text-center mb-6 md:mb-12">
+                  <BlurFade delay={0.2} duration={0.6}>
+                    <p className="text-2xl md:text-4xl text-gray-800 font-bold leading-tight" style={{ fontFamily: 'var(--font-jost)' }}>
+                      Somewhere in the world, someone feels just like you. Don&apos;t you wonder what their favorite place is? We&apos;ll bring you together.
+                    </p>
+                  </BlurFade>
                 </div>
-              )}
 
-              <button
-                onClick={handlePage5Next}
-                className="w-full bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
-              >
-                Next
-              </button>
+                <div className="mb-8">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="w-full px-0 py-6 border-0 border-b-2 border-gray-200 focus:border-black outline-none text-2xl md:text-3xl font-light transition-colors text-center placeholder:text-gray-500"
+                  />
+                  <p className="mt-3 text-center text-sm text-gray-400 font-light">
+                    We&apos;ll send you the result to this email
+                  </p>
+                </div>
+
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Fixed Button at Bottom */}
+            <div className="p-4 md:p-8">
+              <div className="w-full max-w-4xl mx-auto">
+                <button
+                  onClick={handlePage5Next}
+                  className="w-full bg-black text-white py-6 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -627,37 +635,43 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
             currentPage === 6 ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-2xl text-center space-y-4 md:space-y-6">
-              <h2 className="text-3xl md:text-5xl font-black mb-3 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-jost)', fontWeight: 900 }}>
-                Thank You!
-              </h2>
+          <div className="w-full h-full flex flex-col">
+            {/* Content Area */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+              <div className="w-full max-w-4xl text-center">
+                <h2 className="text-3xl md:text-5xl font-black mb-3 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-jost)', fontWeight: 900 }}>
+                  Thank You!
+                </h2>
 
-              <div className="my-4 md:my-6">
-                <img
-                  src="https://assets.withwayo.com/gallery/1763710183360-htmxwk-friendship.png"
-                  alt="Thank you"
-                  className="w-full max-w-md mx-auto rounded-lg"
-                />
-              </div>
+                <div className="my-4 md:my-6">
+                  <img
+                    src="https://assets.withwayo.com/gallery/1763710183360-htmxwk-friendship.png"
+                    alt="Thank you"
+                    className="w-full max-w-md mx-auto rounded-lg"
+                  />
+                </div>
 
-              <p className="text-lg md:text-2xl text-gray-600 font-light leading-relaxed mb-4 md:mb-6">
-                Your place will become part of someone else&apos;s journey.
-              </p>
-
-              <div className="space-y-3 md:space-y-4">
-                <button
-                  onClick={handleCopyLink}
-                  className="w-full max-w-sm mx-auto bg-black text-white py-4 md:py-6 px-6 md:px-8 text-lg md:text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
-                >
-                  Copy Link to Share
-                </button>
+                <p className="text-lg md:text-2xl text-gray-600 font-light leading-relaxed mb-4 md:mb-6" style={{ fontFamily: 'var(--font-jost)' }}>
+                  Your place will become part of someone else&apos;s journey.
+                </p>
 
                 {linkCopied && (
                   <p className="text-base md:text-lg text-green-600 font-medium animate-in fade-in duration-300">
                     Link copied! Send to your friends 🎉
                   </p>
                 )}
+              </div>
+            </div>
+
+            {/* Fixed Button at Bottom */}
+            <div className="p-4 md:p-8">
+              <div className="w-full max-w-4xl mx-auto">
+                <button
+                  onClick={handleCopyLink}
+                  className="w-full bg-black text-white py-4 md:py-6 px-6 md:px-8 text-lg md:text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
+                >
+                  Copy Link to Share
+                </button>
               </div>
             </div>
           </div>
