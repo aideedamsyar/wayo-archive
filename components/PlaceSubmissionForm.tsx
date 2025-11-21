@@ -558,13 +558,13 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
             currentPage === 5 ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className="w-full h-full flex items-center justify-center p-8">
-            <div className="w-full max-w-2xl text-center space-y-8">
-              <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-wide" style={{ fontFamily: 'var(--font-jost)', fontWeight: 900 }}>
+          <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+            <div className="w-full max-w-2xl text-center space-y-4 md:space-y-6">
+              <h2 className="text-3xl md:text-5xl font-black mb-3 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-jost)', fontWeight: 900 }}>
                 Thank You!
               </h2>
 
-              <div className="my-8">
+              <div className="my-4 md:my-6">
                 <img
                   src="https://assets.withwayo.com/gallery/1763710183360-htmxwk-friendship.png"
                   alt="Thank you"
@@ -572,20 +572,20 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
                 />
               </div>
 
-              <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed mb-8">
+              <p className="text-lg md:text-2xl text-gray-600 font-light leading-relaxed mb-4 md:mb-6">
                 Your place will become part of someone else&apos;s journey.
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 <button
                   onClick={handleCopyLink}
-                  className="w-full max-w-sm mx-auto bg-black text-white py-6 px-8 text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
+                  className="w-full max-w-sm mx-auto bg-black text-white py-4 md:py-6 px-6 md:px-8 text-lg md:text-xl font-medium hover:bg-gray-800 transition-colors rounded-full"
                 >
                   Copy Link to Share
                 </button>
 
                 {linkCopied && (
-                  <p className="text-lg text-green-600 font-medium animate-in fade-in duration-300">
+                  <p className="text-base md:text-lg text-green-600 font-medium animate-in fade-in duration-300">
                     Link copied! Send to your friends 🎉
                   </p>
                 )}
