@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Wayo icon">
+  <defs>
+    <linearGradient id="wayograd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111" />
+      <stop offset="100%" stop-color="#333" />
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="12" fill="url(#wayograd)" />
+  <path
+    d="M17 25h9l10 40 11-40h8l10 40 11-40h9l-14 46h-11l-9-35-9 35H31L17 25Z"
+    fill="#fff"
+  />
+</svg>
