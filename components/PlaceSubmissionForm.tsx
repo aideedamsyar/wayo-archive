@@ -32,6 +32,13 @@ interface PlaceSubmissionFormProps {
   onSubmitSuccess?: () => void;
 }
 
+// Declare gtag for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceSubmissionFormProps) {
   // Form data
   const [placeName, setPlaceName] = useState('');
@@ -74,7 +81,17 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
 
   const goToNextPage = () => {
     setSlideDirection('left');
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    setCurrentPage((prev) => {
+      const nextPage = Math.min(prev + 1, totalPages);
+      // Track page progression
+      if (window.gtag) {
+        window.gtag('event', 'form_page_view', {
+          page_number: nextPage,
+          form_name: 'place_submission'
+        });
+      }
+      return nextPage;
+    });
   };
 
   const goToPreviousPage = () => {
@@ -135,6 +152,15 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
       // Store submission ID for email update later
       setSubmissionId(data.id);
 
+      // Track successful submission
+      if (window.gtag) {
+        window.gtag('event', 'form_submit', {
+          form_name: 'place_submission',
+          city: city,
+          country: country
+        });
+      }
+
       // Trigger refresh in parent component
       if (onSubmitSuccess) {
         onSubmitSuccess();
@@ -178,6 +204,12 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
           // Don't block progression if email update fails
         } else {
           console.log('Email updated successfully:', data);
+          // Track email collection
+          if (window.gtag) {
+            window.gtag('event', 'email_collected', {
+              form_name: 'place_submission'
+            });
+          }
         }
       } catch (err) {
         console.error('Email update error:', err);
@@ -199,8 +231,24 @@ export default function PlaceSubmissionForm({ onClose, onSubmitSuccess }: PlaceS
         particleCount: 100,
         origin: { y: 0.6 }
       });
+      // Track link share
+      if (window.gtag) {
+        window.gtag('event', 'share', {
+          method: 'copy_link',
+          content_type: 'submission_complete'
+        });
+      }
     });
   };
+
+  // Track form open on mount
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('event', 'form_start', {
+        form_name: 'place_submission'
+      });
+    }
+  }, []);
 
   return (
     <div

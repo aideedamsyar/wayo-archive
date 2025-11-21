@@ -61,8 +61,9 @@ export default function PhotoMeshLocal({
   const lastReportRef = useRef(0);
   const notifiedReadyRef = useRef(false);
 
-  // Load a small gallery-only thumbnail; no raw fallback to avoid huge decodes
+  // Load a small gallery-only thumbnail; fall back to raw if transform host blocks CORS
   const imageUrl = ImagePresets.galleryThumbnail(photo.url);
+  const fallbackUrl = photo.url;
   useEffect(() => {
     let isMounted = true;
     const img = new Image();
@@ -110,6 +111,11 @@ export default function PhotoMeshLocal({
 
     img.onerror = () => {
       if (!isMounted) return;
+      // Retry with original URL if transform fails
+      if (img.src !== fallbackUrl) {
+        img.src = fallbackUrl;
+        return;
+      }
       if (!notifiedReadyRef.current) {
         notifiedReadyRef.current = true;
         onReady?.();
@@ -121,7 +127,7 @@ export default function PhotoMeshLocal({
     return () => {
       isMounted = false;
     };
-  }, [imageUrl, onReady, placeholderTexture]);
+  }, [imageUrl, fallbackUrl, onReady, placeholderTexture]);
 
   // Ensure material updates when texture arrives
   useEffect(() => {

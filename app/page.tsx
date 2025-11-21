@@ -6,6 +6,13 @@ import PhotoLightbox from '@/components/PhotoLightbox';
 import PlaceSubmissionForm from '@/components/PlaceSubmissionForm';
 import { TextAnimate } from '@/components/TextAnimate';
 
+// Declare gtag for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 interface Photo {
   id: string;
   url: string;
@@ -111,6 +118,15 @@ export default function HomePage() {
     setClickPosition(initialPosition);
     setActiveFramePosition(initialPosition);
     setSelectedPhoto(photo);
+
+    // Track photo click
+    if (window.gtag) {
+      window.gtag('event', 'photo_click', {
+        photo_id: photo.id,
+        city: photo.city,
+        country: photo.country
+      });
+    }
   };
 
   const handleActiveFrameUpdate = (screenPosition: ScreenPosition) => {
@@ -136,6 +152,12 @@ export default function HomePage() {
   const openInfo = () => {
     setShowInfo(true);
     requestAnimationFrame(() => setInfoActive(true));
+    // Track info drawer open
+    if (window.gtag) {
+      window.gtag('event', 'info_open', {
+        content_type: 'about_wayo'
+      });
+    }
   };
 
   const closeInfo = () => {
@@ -149,6 +171,12 @@ export default function HomePage() {
     setFilteredError(null);
     setFilterFetchTick((t) => t + 1);
     closeInfo();
+    // Track city filter
+    if (window.gtag) {
+      window.gtag('event', 'city_filter', {
+        city: city.trim()
+      });
+    }
   };
 
   const retryCitiesFetch = () => {
@@ -299,7 +327,16 @@ Project`}
 
             {/* Button */}
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => {
+                setShowForm(true);
+                // Track CTA click
+                if (window.gtag) {
+                  window.gtag('event', 'cta_click', {
+                    button_text: 'dont_click_here',
+                    action: 'open_submission_form'
+                  });
+                }
+              }}
               className="w-full max-w-sm mx-auto bg-black text-white py-5 px-8 rounded-full text-xl font-medium hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
               style={{ letterSpacing: '0' }}
             >
